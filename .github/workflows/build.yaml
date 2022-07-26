@@ -55,6 +55,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: 'latest,${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}'
+          tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}'
           labels: ${{ steps.meta.outputs.labels }}
           build-args: SPRING_BOOT_ADMIN_VERSION=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
