@@ -47,6 +47,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: 'latest,${{ steps.get_latest_release.outputs.data.tag_name }}'
+          tags: 'latest,${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}'
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: SPRING_BOOT_ADMIN_VERSION=${{ steps.get_latest_release.outputs.data.tag_name }}
+          build-args: SPRING_BOOT_ADMIN_VERSION=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
