@@ -44,17 +44,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@1237c3e3d6926ae8bfad16f64e08d259b9943637
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
       - name: Build and push Docker image
         uses: docker/build-push-action@b5730d24715e542a67be9991a420842b8b072900
         with:
           context: .
           push: true
           tags: '${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest,${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}'
-          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          labels: |
+            org.opencontainers.image.licenses=Apache-2.0
+            org.opencontainers.image.title=spring-boot-admin-docker
+            org.opencontainers.image.description=Prepackaged version of spring-boot, wrapped in a container
+            org.opencontainers.image.url=https://github.com/cloudflightio/spring-boot-admin-docker
+            org.opencontainers.image.source=https://github.com/cloudflightio/spring-boot-admin-docker
+            org.opencontainers.image.version=nightly
           build-args: SPRING_BOOT_ADMIN_VERSION=${{ fromJson(steps.get_latest_release.outputs.data).tag_name }}
