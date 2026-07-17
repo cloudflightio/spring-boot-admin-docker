@@ -1,0 +1,33 @@
+[versions]
+kotlin = "2.1.21"
+springBoot = "3.5.4"
+# Spring Boot Admin is versioned independently of Spring Boot (they happen to align today).
+springBootAdmin = "3.5.4"
+springCloud = "2025.0.3"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+
+[libraries]
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "springBoot" }
+spring-boot-admin-bom = { module = "de.codecentric:spring-boot-admin-dependencies", version.ref = "springBootAdmin" }
+spring-cloud-bom = { module = "org.springframework.cloud:spring-cloud-dependencies", version.ref = "springCloud" }
+
+# Dependencies managed by Spring Boot BOM
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+
+# Spring Boot Admin server UI + registration endpoint (version managed by the SBA BOM).
+spring-boot-admin-starter-server = { module = "de.codecentric:spring-boot-admin-starter-server" }
+
+# Discover Spring Boot Applications running in Kubernetes (version managed by the Spring Cloud BOM).
+spring-cloud-starter-kubernetes-client-all = { module = "org.springframework.cloud:spring-cloud-starter-kubernetes-client-all" }
+
+# Test dependencies (managed by Spring Boot BOM)
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
